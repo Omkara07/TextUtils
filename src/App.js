@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import Navbar from './Components/Navbar';
 import TextArea from './Components/TextArea';
 import Alert from './Components/Alert';
-import About from './Components/About';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+// import About from './Components/About';
+// import {
+//   createBrowserRouter,
+//   RouterProvider,
+// } from "react-router-dom";
 
 function App() {
 
@@ -50,23 +50,29 @@ function App() {
     // }
 
     // latest way of routing
-    const router = createBrowserRouter([
-      {
-        path: "/",
-        element: <><Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode}/>
-                  <Alert alert={alert}/>
-                  <div className="container my-3 "><TextArea heading="Enter text to be Analysed" mode={mode} showAlert={showAlert}/></div></>,
-      },
-      {
-        path: "/about",
-        element: <><Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode}/>
-        <Alert alert={alert}/>
-        <div className="container my-3 "> <About /> </div> </>,
-      }
-    ]);
+    // const router = createBrowserRouter([
+    //   {
+    //     path: "/",
+    //     element: <><Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode}/>
+    //               <Alert alert={alert}/>
+    //               <div className="container my-3 "><TextArea heading="Enter text to be Analysed" mode={mode} showAlert={showAlert}/></div></>,
+    //   },
+    //   {
+    //     path: "/about",
+    //     element: <><Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode}/>
+    //     <Alert alert={alert}/>
+    //     <div className="container my-3 "> <About /> </div> </>,
+    //   }
+    // ]);
   return (
     <>
-      <RouterProvider router={router} />
+      {/* <RouterProvider router={router} /> */}
+
+      <Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode}/>
+      <Alert alert={alert}/>
+      <div className="container my-3 ">
+        <TextArea heading="Enter text to be Analysed" mode={mode} showAlert={showAlert}/>
+      </div>
     </>
   );
 } 
