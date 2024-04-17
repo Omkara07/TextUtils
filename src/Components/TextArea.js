@@ -22,6 +22,11 @@ export default function TextArea(props) {
     props.showAlert("Text is Reversed", "success");
   }
   
+  const handleCopyClick = ()=>{
+    navigator.clipboard.writeText(text);
+    props.showAlert("Text is copied", "success");
+  }
+  
   const handleClearClick = ()=>{
     let newText = "";
     setText(newText);
@@ -48,24 +53,26 @@ export default function TextArea(props) {
   return (
     <>
     <div style={{color:props.mode==="light"?"black":"white"}}>
-        <h1>{props.heading}</h1>
+        <h1 className="mb-10">{props.heading}</h1>
         <div className="mb-3" >
             <textarea className="form-control" style={{backgroundColor: props.mode==="light"?"white":"#0f0f0f", color:props.mode==="light"?"black":"white"}} value={text} onChange={handleOnChange} id="myBox" rows="11"></textarea>
         </div>
-        <button className="btn btn-success mx-2" onClick={handleUpClick}>Convert to Uppercase</button>
-        <button className="btn btn-success mx-2" onClick={handleLoClick}>Convert to Lowercase</button>
-        <button className="btn btn-success mx-2" onClick={handleReverseClick}>Reverse the text</button>
-        <button className="btn btn-success mx-2" onClick={handleRemoveExtraSpacesClick}>Remove extra spaces</button>
-        <button className="btn btn-success mx-2" onClick={handleClearClick}>Clear text</button>
+        <button disabled={text.length===0} className="btn btn-success mx-2 my-2" onClick={handleLoClick}>Convert to Lowercase</button>
+        <button disabled={text.length===0} className="btn btn-success mx-2 my-2" onClick={handleUpClick}>Convert to Uppercase</button>
+        <button disabled={text.length===0} className="btn btn-success mx-2 my-2" onClick={handleReverseClick}>Reverse the text</button>
+        <button disabled={text.length===0} className="btn btn-success mx-2 my-2" onClick={handleRemoveExtraSpacesClick}>Remove extra spaces</button>
+        <button disabled={text.length===0} className="btn btn-success mx-2 my-2" onClick={handleCopyClick}>Copy Text</button>
+        <button disabled={text.length===0} className="btn btn-success mx-5 my-2" onClick={handleClearClick}>Clear text</button>
     </div>
 
     <div className="my-3" style={{color:props.mode==="light"?"black":"white"}}>
       <h2>Your Text summary</h2>
-      <p> <b>{text.split(" ").length} words and {text.length} characters </b></p>
-      <p> <b>{0.008 * text.split(" ").length} minutes to read </b></p>
+      {/* filter takes a function and keep only those elements for which the func return true */}
+      <p> <b>{text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} words and {text.length} characters </b></p>
+      <p> <b>{0.008 * text.split(" ").filter((element)=>{return element.length !== 0}).length} minutes to read </b></p>
 
       <h2>Preview</h2>
-      <p>{text.length > 0 ? text : "Enter something to preview"}</p>
+      <p>{text.length > 0 ? text : "Nothing to preview"}</p>
     </div>
 
     </>

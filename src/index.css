@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.accordion-button::after {
+  filter: invert(1);
+}
+.mx-5 {
+  margin-right: 10rem !important;
+  margin-left: 12rem !important;
+}
